@@ -8,6 +8,25 @@ const login_get = (req, res) => {
   res.render('login');
 };
 
+const login_post = async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+
+    const user = await db.findUser(username);
+    if (!user) {
+      return res.redirect('/login');
+    }
+
+    if (password !== user.password) {
+      return res.redirect('/login');
+    }
+
+    res.redirect(`/profile?username=${user.username}`);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const register_get = (req, res) => {
   res.render('register');
 };
@@ -24,7 +43,7 @@ const register_post = async (req, res, next) => {
 };
 
 const profile_get = (req, res) => {
-  res.render('profile');
+  res.render('profile', { username: req.query.username });
 };
 
 const logout_get = (req, res) => {
@@ -34,6 +53,7 @@ const logout_get = (req, res) => {
 module.exports = {
   home_get,
   login_get,
+  login_post,
   register_get,
   register_post,
   profile_get,
