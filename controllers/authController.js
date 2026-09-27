@@ -7,12 +7,15 @@ const home_get = (req, res) => {
 };
 
 const login_get = (req, res) => {
-  res.render('login');
+  const messages = req.session.messages || [];
+  req.session.messages = [];
+  res.render('login', { messages });
 };
 
 const login_post = passport.authenticate('local', {
   successRedirect: '/profile',
   failureRedirect: '/login',
+  failureMessage: true,
 });
 
 const register_get = (req, res) => {

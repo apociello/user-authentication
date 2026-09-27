@@ -25,5 +25,13 @@
     <a href="/">Home</a> 
     <a href="/register">Don't have an account? Sign up</a>
   </nav>
+
+  <% if (messages && messages.length > 0) { %>
+    <ul>
+      <% messages.forEach(msg => { %>
+        <li><%= msg %></li>
+      <% }); %>
+    </ul>
+  <% } %>
 </body>
 </html>
