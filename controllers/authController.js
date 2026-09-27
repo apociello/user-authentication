@@ -1,3 +1,5 @@
+const passport = require('../config/passport.js');
+const bcrypt = require('bcryptjs');
 const db = require('../db/queries.js');
 
 const home_get = (req, res) => {
@@ -8,24 +10,10 @@ const login_get = (req, res) => {
   res.render('login');
 };
 
-const login_post = async (req, res, next) => {
-  try {
-    const { username, password } = req.body;
-
-    const user = await db.findUserByName(username);
-    if (!user) {
-      return res.redirect('/login');
-    }
-
-    if (password !== user.password) {
-      return res.redirect('/login');
-    }
-
-    res.redirect(`/profile?username=${user.username}`);
-  } catch (err) {
-    next(err);
-  }
-};
+const login_post = passport.authenticate('local', {
+  successRedirect: '/profile',
+  failureRedirect: '/login',
+});
 
 const register_get = (req, res) => {
   res.render('register');
@@ -34,7 +22,8 @@ const register_get = (req, res) => {
 const register_post = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    await db.createUser(username, password);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await db.createUser(username, hashedPassword);
 
     res.redirect('/login');
   } catch (err) {
@@ -43,11 +32,16 @@ const register_post = async (req, res, next) => {
 };
 
 const profile_get = (req, res) => {
-  res.render('profile', { username: req.query.username });
+  res.render('profile', { username: req.user ? req.user.username : null });
 };
 
-const logout_get = (req, res) => {
-  res.redirect('/');
+const logout_get = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
+  });
 };
 
 module.exports = {
