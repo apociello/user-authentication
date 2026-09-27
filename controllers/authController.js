@@ -12,7 +12,7 @@ const login_post = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    const user = await db.findUser(username);
+    const user = await db.findUserByName(username);
     if (!user) {
       return res.redirect('/login');
     }

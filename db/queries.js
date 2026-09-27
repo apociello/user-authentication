@@ -7,14 +7,20 @@ const createUser = async (username, password) => {
   ]);
 };
 
-const findUser = async (username) => {
+const findUserByName = async (username) => {
   const result = await pool.query('SELECT * FROM users WHERE username = $1', [
     username,
   ]);
   return result.rows[0];
 };
 
+const findUserById = async (id) => {
+  const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
+  return result.rows[0];
+};
+
 module.exports = {
   createUser,
-  findUser,
+  findUserByName,
+  findUserById,
 };
