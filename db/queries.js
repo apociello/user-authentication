@@ -26,9 +26,17 @@ const updateUsername = async (id, username) => {
   ]);
 };
 
+const updatePassword = async (id, hashedPassword) => {
+  await pool.query('UPDATE users SET password = $1 WHERE id = $2', [
+    hashedPassword,
+    id,
+  ]);
+};
+
 module.exports = {
   createUser,
   findUserByName,
   findUserById,
   updateUsername,
+  updatePassword,
 };

@@ -9,6 +9,8 @@ const {
   logout_get,
   edit_get,
   edit_post,
+  password_get,
+  password_post,
 } = require('../controllers/authController.js');
 
 const {
@@ -27,5 +29,7 @@ router.get('/profile', ensureAuthenticated, profile_get);
 router.get('/logout', ensureAuthenticated, logout_get);
 router.get('/profile/edit', ensureAuthenticated, edit_get);
 router.post('/profile/edit', ensureAuthenticated, edit_post);
+router.get('/profile/password', ensureAuthenticated, password_get);
+router.post('/profile/password', ensureAuthenticated, password_post);
 
 module.exports = router;

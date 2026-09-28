@@ -68,6 +68,31 @@ const edit_post = async (req, res, next) => {
   }
 };
 
+const password_get = (req, res) => {
+  const messages = req.session.messages || [];
+  req.session.messages = [];
+  res.render('password', { messages });
+};
+
+const password_post = async (req, res, next) => {
+  try {
+    const { current_password, new_password } = req.body;
+
+    const match = await bcrypt.compare(current_password, req.user.password);
+    if (!match) {
+      req.session.messages = ['Current password is incorrect'];
+      return res.redirect('/profile/password');
+    }
+
+    const hashedPassword = await bcrypt.hash(new_password, 10);
+    await db.updatePassword(req.user.id, hashedPassword);
+
+    res.redirect('/profile');
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   login_get,
   login_post,
@@ -77,4 +102,6 @@ module.exports = {
   logout_get,
   edit_get,
   edit_post,
+  password_get,
+  password_post,
 };
