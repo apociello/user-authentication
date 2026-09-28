@@ -93,6 +93,21 @@ const password_post = async (req, res, next) => {
   }
 };
 
+const delete_post = async (req, res, next) => {
+  try {
+    await db.deleteUser(req.user.id);
+
+    req.logout((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/login');
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   login_get,
   login_post,
@@ -104,4 +119,5 @@ module.exports = {
   edit_post,
   password_get,
   password_post,
+  delete_post,
 };

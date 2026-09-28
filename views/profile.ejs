@@ -13,5 +13,9 @@
       <a href="/profile/password">Change password</a>
       <a href="/logout">Log out</a>
     </nav>
+
+    <form action="/profile/delete" method="POST" onsubmit="return confirm('Delete your account? This cannot be undone.')">
+      <button type="submit">Delete account</button>
+    </form>
 </body>
 </html>

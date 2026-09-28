@@ -11,6 +11,7 @@ const {
   edit_post,
   password_get,
   password_post,
+  delete_post,
 } = require('../controllers/authController.js');
 
 const {
@@ -31,5 +32,6 @@ router.get('/profile/edit', ensureAuthenticated, edit_get);
 router.post('/profile/edit', ensureAuthenticated, edit_post);
 router.get('/profile/password', ensureAuthenticated, password_get);
 router.post('/profile/password', ensureAuthenticated, password_post);
+router.post('/profile/delete', ensureAuthenticated, delete_post);
 
 module.exports = router;
