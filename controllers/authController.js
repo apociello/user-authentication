@@ -2,10 +2,6 @@ const passport = require('../config/passport.js');
 const bcrypt = require('bcryptjs');
 const db = require('../db/queries.js');
 
-const home_get = (req, res) => {
-  res.render('index');
-};
-
 const login_get = (req, res) => {
   const messages = req.session.messages || [];
   req.session.messages = [];
@@ -35,7 +31,7 @@ const register_post = async (req, res, next) => {
 };
 
 const profile_get = (req, res) => {
-  res.render('profile', { username: req.user ? req.user.username : null });
+  res.render('profile', { username: req.user.username });
 };
 
 const logout_get = (req, res, next) => {
@@ -43,12 +39,11 @@ const logout_get = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect('/');
+    res.redirect('/login');
   });
 };
 
 module.exports = {
-  home_get,
   login_get,
   login_post,
   register_get,
