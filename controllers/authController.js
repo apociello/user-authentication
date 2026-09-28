@@ -15,7 +15,9 @@ const login_post = passport.authenticate('local', {
 });
 
 const register_get = (req, res) => {
-  res.render('register');
+  const messages = req.session.messages || [];
+  req.session.messages = [];
+  res.render('register', { messages });
 };
 
 const register_post = async (req, res, next) => {
@@ -26,6 +28,10 @@ const register_post = async (req, res, next) => {
 
     res.redirect('/login');
   } catch (err) {
+    if (err.code === '23505') {
+      req.session.messages = ['Username already taken'];
+      return res.redirect('/register');
+    }
     next(err);
   }
 };

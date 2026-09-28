@@ -9,7 +9,7 @@
 
   <form action="/register" method="POST">
     <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+    <input type="text" id="username" name="username" maxlength="50" required>
 
     <br>
 
@@ -22,5 +22,13 @@
   </form>
 
   <p><a href="/login">Already have an account? Log in</a></p>
+
+  <% if (messages && messages.length > 0) { %>
+  <ul>
+    <% messages.forEach(msg => { %>
+      <li><%= msg %></li>
+    <% }); %>
+  </ul>
+  <% } %>
 </body>
 </html>
