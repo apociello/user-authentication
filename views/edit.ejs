@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit username</title>
+</head>
+<body>
+  <h1>Edit username</h1>
+
+  <form action="/profile/edit" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" value="<%= username %>" maxlength="50" required>
+
+    <br>
+
+    <button type="submit">Save</button>
+  </form>
+
+  <p><a href="/profile">Cancel</a></p>
+
+  <% if (messages && messages.length > 0) { %>
+    <ul>
+      <% messages.forEach(msg => { %>
+        <li><%= msg %></li>
+      <% }); %>
+    </ul>
+  <% } %>
+</body>
+</html>

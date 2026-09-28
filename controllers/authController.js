@@ -49,6 +49,25 @@ const logout_get = (req, res, next) => {
   });
 };
 
+const edit_get = (req, res) => {
+  const messages = req.session.messages || [];
+  req.session.messages = [];
+  res.render('edit', { username: req.user.username, messages });
+};
+
+const edit_post = async (req, res, next) => {
+  try {
+    await db.updateUsername(req.user.id, req.body.username);
+    res.redirect('/profile');
+  } catch (err) {
+    if (err.code === '23505') {
+      req.session.messages = ['Username already taken'];
+      return res.redirect('/profile/edit');
+    }
+    next(err);
+  }
+};
+
 module.exports = {
   login_get,
   login_post,
@@ -56,4 +75,6 @@ module.exports = {
   register_post,
   profile_get,
   logout_get,
+  edit_get,
+  edit_post,
 };

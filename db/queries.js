@@ -19,8 +19,16 @@ const findUserById = async (id) => {
   return result.rows[0];
 };
 
+const updateUsername = async (id, username) => {
+  await pool.query('UPDATE users SET username = $1 WHERE id = $2', [
+    username,
+    id,
+  ]);
+};
+
 module.exports = {
   createUser,
   findUserByName,
   findUserById,
+  updateUsername,
 };
