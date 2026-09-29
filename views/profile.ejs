@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>Profile</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <h1>Welcome <%= username %>!</h1>
     <p>You are authenticated!</p>
 
+    <form action="/profile/delete" method="POST" onsubmit="return confirm('Delete your account? This cannot be undone.')">
+      <button type="submit">Delete account</button>
+    </form>
+    
     <nav>
       <a href="/profile/edit">Edit username</a> 
       <a href="/profile/password">Change password</a>
       <a href="/logout">Log out</a>
     </nav>
 
-    <form action="/profile/delete" method="POST" onsubmit="return confirm('Delete your account? This cannot be undone.')">
-      <button type="submit">Delete account</button>
-    </form>
 </body>
 </html>

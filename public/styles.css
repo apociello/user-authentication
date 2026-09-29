@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+form {
+  width: 300px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 12px;
+}
+
+input:last-of-type {
+  margin-bottom: 0;
+}
+
+button {
+  padding: 6px 12px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+nav,
+p:has(a) {
+  margin-top: 1.5rem;
+}
+
+nav a {
+  margin-right: 15px;
+}
+
+ul {
+  list-style: none;
+  margin-top: 1.5rem;
+  color: #b00020;
+}
+
+li {
+  margin-bottom: 4px;
+}

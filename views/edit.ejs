@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Edit username</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <h1>Edit username</h1>
@@ -21,7 +22,7 @@
   <% if (messages && messages.length > 0) { %>
     <ul>
       <% messages.forEach(msg => { %>
-        <li><%= msg %></li>
+        <li>Error: <%= msg %></li>
       <% }); %>
     </ul>
   <% } %>
