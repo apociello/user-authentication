@@ -10,7 +10,7 @@
 
   <form action="/register" method="POST">
     <label for="username">Username:</label>
-    <input type="text" id="username" name="username" maxlength="50" required>
+    <input type="text" id="username" name="username" maxlength="50" pattern="\S+" title="No spaces allowed" required>
 
     <br>
 
