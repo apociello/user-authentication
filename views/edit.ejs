@@ -16,12 +16,6 @@
 
   <p><a href="/profile">Cancel</a></p>
 
-  <% if (messages && messages.length > 0) { %>
-    <ul>
-      <% messages.forEach(msg => { %>
-        <li>Error: <%= msg %></li>
-      <% }); %>
-    </ul>
-  <% } %>
+  <%- include('./partials/messages.ejs') %>
 </body>
 </html>
