@@ -5,7 +5,7 @@ const db = require('../db/queries.js');
 const login_get = (req, res) => {
   const messages = req.session.messages || [];
   req.session.messages = [];
-  res.render('login', { messages });
+  res.render('login', { messages, title: 'Login' });
 };
 
 const login_post = passport.authenticate('local', {
@@ -17,7 +17,7 @@ const login_post = passport.authenticate('local', {
 const register_get = (req, res) => {
   const messages = req.session.messages || [];
   req.session.messages = [];
-  res.render('register', { messages });
+  res.render('register', { messages, title: 'Sign Up' });
 };
 
 const register_post = async (req, res, next) => {
@@ -37,7 +37,7 @@ const register_post = async (req, res, next) => {
 };
 
 const profile_get = (req, res) => {
-  res.render('profile', { username: req.user.username });
+  res.render('profile', { username: req.user.username, title: 'Profile' });
 };
 
 const logout_get = (req, res, next) => {
@@ -52,7 +52,7 @@ const logout_get = (req, res, next) => {
 const edit_get = (req, res) => {
   const messages = req.session.messages || [];
   req.session.messages = [];
-  res.render('edit', { username: req.user.username, messages });
+  res.render('edit', { username: req.user.username, messages, title: 'Edit username' });
 };
 
 const edit_post = async (req, res, next) => {
@@ -71,7 +71,7 @@ const edit_post = async (req, res, next) => {
 const password_get = (req, res) => {
   const messages = req.session.messages || [];
   req.session.messages = [];
-  res.render('password', { messages });
+  res.render('password', { messages, title: 'Change password' });
 };
 
 const password_post = async (req, res, next) => {
